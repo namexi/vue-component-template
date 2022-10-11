@@ -1,10 +1,9 @@
 "use strict";
-
 const path = require("path");
-const config = require("../config");
 const utils = require("./utils");
-const fs = require("fs");
+const config = require("../config");
 const vueLoaderConfig = require("./vue-loader.conf");
+const fs = require("fs");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 function resolve(dir) {
@@ -13,22 +12,28 @@ function resolve(dir) {
 
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
-  loader: "eslint-loader",
+  use: {
+    loader: "eslint-loader",
+    options: {
+      formatter: require("eslint-friendly-formatter"),
+      emitWarning: !config.dev.showEslintErrorsInOverlay,
+    },
+  },
   enforce: "pre",
   include: [resolve("src"), resolve("test")],
-  options: {
-    formatter: require("eslint-friendly-formatter"),
-    emitWarning: !config.dev.showEslintErrorsInOverlay,
-  },
 });
+
+console.log("base");
+// console.log(vueLoaderConfig);
 module.exports = {
+  context: path.resolve(__dirname, "../"),
   entry: {
     app: "./src/main.js",
-    example: "./examples.src/main.js",
+    example: "./examples/src/main.js",
   },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "[name].[contenthash].bundle.js",
+    path: config.build.assetsRoot,
+    filename: "[name].js",
     publicPath:
       process.env.NODE_ENV === "production"
         ? config.build.assetsPublicPath
@@ -41,8 +46,8 @@ module.exports = {
       "@": resolve("src"),
       assets: resolve("src/assets"),
       components: resolve("src/components"),
-      "xd-ui/lib/style/theme": resolve("src/components/style/src/theme"),
-      "xd-ui/lib": resolve("src/components"),
+      "vx-ui/lib/style/theme": resolve("src/components/style/src/theme"),
+      "vx-ui/lib": resolve("src/components"),
       styles: resolve("src/styles"),
       utils: resolve("src/utils"),
       demos: resolve("src/demos"),
@@ -51,7 +56,7 @@ module.exports = {
   },
   module: {
     rules: [
-      ...(config.dev.useEslint ? [createLintingRule()] : []),
+      // ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.vue$/,
         use: [
@@ -72,12 +77,17 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png | jpe?g| gif | svg)(\?.*)?$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          name: utils.assetsPath("img/[name].[hash:7].[ext]"),
-        },
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 10000,
+              name: utils.assetsPath("img/[name].[hash:7].[ext]"),
+            },
+          },
+        ],
+        type: "javascript/auto",
       },
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,

@@ -1,14 +1,29 @@
-"use strict";
+'use strict'
+// Template version: 1.3.1
+// see http://vuejs-templates.github.io/webpack for documentation.
+
+// 获取当前电脑IP
+const path = require('path')
+var os = require('os'),iptable = {},ifaces = os.networkInterfaces();
+for (var dev in ifaces) {
+  ifaces[dev].forEach(function(details,alias){
+    if (details.family=='IPv4') {
+      iptable[dev+(alias?':'+alias:'')]=details.address;
+    }
+  });
+}
+const HOST = Object.values(iptable)[0]
 
 module.exports = {
   dev: {
+
     // Paths
-    assetsSubDirectory: "static",
-    assetsPublicPath: "/",
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/',
     proxyTable: {},
 
     // Various Dev Server settings
-    host: HOST || "localhost", // can be overwritten by process.env.HOST
+    host: HOST || 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
@@ -28,23 +43,24 @@ module.exports = {
      */
 
     // https://webpack.js.org/configuration/devtool/#development
-    devtool: "cheap-module-eval-source-map",
+    devtool: 'cheap-module-eval-source-map',
 
     // If you have problems debugging vue-files in devtools,
     // set this to false - it *may* help
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true,
+    cssSourceMap: true
   },
+
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, "../dist/index.html"),
-    demo: path.resolve(__dirname, "../dist/demo.html"),
+    index: path.resolve(__dirname, '../dist/index.html'),
+    demo: path.resolve(__dirname, '../dist/demo.html'),
     // Paths
-    assetsRoot: path.resolve(__dirname, "../dist"),
-    assetsSubDirectory: "static",
-    assetsPublicPath: "./",
+    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
@@ -52,19 +68,19 @@ module.exports = {
 
     productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
-    devtool: "#source-map",
+    devtool: '#source-map',
 
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
-    productionGzipExtensions: ["js", "css"],
+    productionGzipExtensions: ['js', 'css'],
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
     // `npm run build --report`
     // Set to `true` or `false` to always turn it on or off
-    bundleAnalyzerReport: process.env.npm_config_report,
-  },
-};
+    bundleAnalyzerReport: process.env.npm_config_report
+  }
+}

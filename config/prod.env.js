@@ -1,5 +1,4 @@
-"use strict";
-
+'use strict'
 module.exports = {
-  NODE_EVN: "production",
-};
+  NODE_ENV: '"production"'
+}
