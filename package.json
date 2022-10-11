@@ -4,6 +4,7 @@
   "description": "test more process from FE",
   "main": "index.js",
   "scripts": {
+    "build:theme": "gulp build --gulpfile src/components/style/gulpfile.js",
     "build:component": "webpack --config ./build/webpack.common.js && webpack --config ./build/webpack.component.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
