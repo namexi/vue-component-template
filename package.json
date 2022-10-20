@@ -1,6 +1,6 @@
 {
   "name": "component-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "test more process from FE",
   "main": "index.js",
   "scripts": {
@@ -97,5 +97,14 @@
     "npm": "^8.19.2",
     "vue": "^2.5.3",
     "vue-router": "^3.0.1"
-  }
+  },
+  "keywords": [
+    "ui",
+    "vue",
+    "components"
+  ],
+  "files": [
+    "lib"
+  ],
+  "license": "MIT"
 }
