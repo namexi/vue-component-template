@@ -1,8 +1,8 @@
 {
-  "name": "component-cli",
-  "version": "1.0.1",
+  "name": "xd-components-cli",
+  "version": "1.0.0",
   "description": "test more process from FE",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "build:theme": "gulp build --gulpfile src/components/style/gulpfile.js",
     "build:component": "webpack --config ./build/webpack.common.js && webpack --config ./build/webpack.component.js",
