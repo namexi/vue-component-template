@@ -1,5 +1,5 @@
 {
-  "name": "xd-components-cli",
+  "name": "xd-component-cli",
   "version": "1.0.0",
   "description": "test more process from FE",
   "main": "lib/index.js",
