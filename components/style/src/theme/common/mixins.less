@@ -1,0 +1,24 @@
+@resolution: 2, 3, 4, 5, 6;
+// @function var-color-value (@value) {
+//   @result: @value;
+//   @each @key, @val in @colors {
+//     @if @value == @val{
+//        @result: var(--vx-@{@key}, @val);
+//     }
+//   }
+//   @return @result;
+// }
+
+.arrow(@rotate:45deg,@color: rgba(153, 153, 153, 0.6)) {
+  content: "";
+  display: inline-block;
+  width: 0.16rem;
+  position: absolute;
+  top: 50%;
+  right: 0.08rem;
+  height: 0.16rem;
+  margin-top: -2px;
+  border-top: 1px solid @color;
+  border-right: 1px solid @color;
+  transform: rotate(@rotate) translateY(-50%);
+}
