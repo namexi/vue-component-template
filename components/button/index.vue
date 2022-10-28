@@ -12,8 +12,8 @@ import Spinner from "../spinner";
 import Ripple from "../ripple";
 
 export default {
-  name: "XButton",
-  componentName: "XButton",
+  name: "XdButton",
+  componentName: "XdButton",
   components: {
     Spinner,
     Ripple,

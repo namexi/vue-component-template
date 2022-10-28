@@ -1,4 +1,19 @@
-import Button from "./button";
+// import Button from "./button";
+
+// const path = require("path");
+let components = [];
+
+// 读地址
+const component = require.context("./", true, /\.vue$/);
+console.log(component.keys());
+const ComponentsModule = {};
+component.keys().forEach((element) => {
+  // 提取文件名称
+  const fileNameArr = element.split("/");
+  const compName = fileNameArr[1];
+  ComponentsModule[compName] = component(element).default || component(element);
+  components.push(ComponentsModule[compName]);
+});
 
 if (!window.requestAnimationFrame) {
   window.requestAnimationFrame =
@@ -6,8 +21,6 @@ if (!window.requestAnimationFrame) {
     window.mozRequestAnimationFrame ||
     setTimeout;
 }
-
-let components = [Button];
 
 const install = (Vue) => {
   components.map((component) => {
@@ -354,5 +367,5 @@ const install = (Vue) => {
 
 export default {
   install,
-  Button,
+  ...ComponentsModule,
 };

@@ -4,6 +4,15 @@ const fs = require("fs");
 const resolve = (dir) => path.join(__dirname, "./", dir);
 
 module.exports = {
+  devServer: {
+    client: {
+      overlay: {
+        errors: false,
+        warnings: false,
+      },
+    },
+  },
+  lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: process.env.Component === "component" ? false : true,
   outputDir: process.env.Component === "component" ? "lib" : "dist",
   pages: {
@@ -31,6 +40,7 @@ module.exports = {
       chunks: ["chunk-vendors", "chunk-common", "lib"],
     },
   },
+
   configureWebpack: (config) => {
     if (process.env.Component === "component") {
       // 为生产环境修改配置...
